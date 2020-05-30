@@ -31,7 +31,7 @@ const userSchema = {
     passsword:String
 }
 
-mongoose.connect("mongodb+srv://shantanu:<shantanu>@shan-xubwn.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://shantanu:shantanu@shan-xubwn.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true });
 const mongoDb = mongoose.connnection;
 
 

@@ -32,9 +32,11 @@ const userSchema = {
 }
 
 mongoose.connect("mongodb+srv://shantanu:<shantanu>@shan-xubwn.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true });
+const mongoDb = mongoose.connnection;
 
-mongoose.on("error", console.error.bind(console, "connection error:"));
-mongoose.once("open", () => {
+
+mongoDB.on("error", console.error.bind(console, "connection error:"));
+mongoDb.once("open", () => {
   console.log(`mongoDB connected succesfully`);
 });
 

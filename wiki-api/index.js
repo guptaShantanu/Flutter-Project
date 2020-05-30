@@ -31,28 +31,36 @@ const userSchema = {
     passsword:String
 }
 
-mongoose.connect("mongodb+srv://shantanu:<shantanu>@shan-xubwn.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://shantanu:shantanu@shan-xubwn.mongodb.net/test?retryWrites=true&w=majority",{ useNewUrlParser: true });
+const mongoDb = mongoose.connnection;
+
+
+mongoDB.on("error", console.error.bind(console, "connection error:"));
+mongoDb.once("open", () => {
+  console.log(`mongoDB connected succesfully`);
+});
 
 
 const Users = mongoose.model('userList',userSchema);
 
 
 app.get('',(request,response)=>{
-    // const pk = new Users({  name:"String",
-    //     email:"String",
-    //     passsword:"String"});
-    // pk.save((err,res)=>{
-    //     if(err){
-    //         console.log(err);
-    //     }else{
-    //         response.status(201).json({
-    //             message:"h bhjgbjbhbgvf gjg fghjjg",
-    //             user:res
-    //         });
-    //     }
-    // });
-    Users.insertMany([{ name:"String", email:"String",passsword:"String"},{ name:"String", email:"String",passsword:"String"}]);
-    response.send('Hello');
+    const pk = new Users({  name:"String",
+        email:"String",
+        passsword:"String"});
+    pk.save((err,res)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log("Inserted Succesfully", res);
+            response.status(201).json({
+                message:"h bhjgbjbhbgvf gjg fghjjg",
+                user:res
+            });
+        }
+    });
+//     Users.insertMany([{ name:"String", email:"String",passsword:"String"},{ name:"String", email:"String",passsword:"String"}]);
+//     response.send('Hello');
     
 });
 

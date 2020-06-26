@@ -17,7 +17,9 @@ class _TaskScreenState extends State<TaskScreen> {
   String myTask = "";
   Database database;
   String dbPath;
+  TimeOfDay myTime;
   int myHour,myMinute;
+  TimeOfDay currentTime = TimeOfDay.now();
   NotificaionService notificaionService;
 
   List<Widget> getTimeWidget(int n) {
@@ -32,6 +34,19 @@ class _TaskScreenState extends State<TaskScreen> {
           )));
     }
     return timeLlist;
+  }
+
+  Future showTimePicker_(BuildContext context)async{
+    TimeOfDay t = await showTimePicker(
+      context: context,
+      initialTime: currentTime,
+    );
+    if(t!=null){
+      myTime = t;
+      myHour=myTime.hour;
+      myMinute = myTime.minute;
+      print(myTime);
+    }
   }
 
   Widget buildBottomSheet(BuildContext context) {
@@ -76,31 +91,11 @@ class _TaskScreenState extends State<TaskScreen> {
                     SizedBox(height: 10.0,),
                     Text('Select time'),
                     SizedBox(height: 10.0,),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: CupertinoPicker(
-                            backgroundColor: Colors.white,
-                            itemExtent: 50.0,
-                            onSelectedItemChanged: (selectedIndex) {
-                              print(selectedIndex);
-                              myHour = selectedIndex;
-                            },
-                            children: getTimeWidget(23),
-                          ),
-                        ),
-                        Expanded(
-                          child: CupertinoPicker(
-                            backgroundColor: Colors.white,
-                            itemExtent: 50.0,
-                            onSelectedItemChanged: (selectedIndex) {
-                              print(selectedIndex);
-                              myMinute = selectedIndex;
-                            },
-                            children: getTimeWidget(59),
-                          ),
-                        ),
-                      ],
+                    GestureDetector(
+                      child: Text('Select time'),
+                      onTap: (){
+                        showTimePicker_(context);
+                      },
                     ),
                   ],
                 )),
@@ -109,11 +104,14 @@ class _TaskScreenState extends State<TaskScreen> {
             ),
             GestureDetector(
               onTap: () {
-                setState(() {
-                  Provider.of<TasksList>(context, listen: false)
-                      .addTask(Task(task: myTask), database,(DateTime.now().millisecondsSinceEpoch/123456).toInt(),notificaionService,[myHour,myMinute]);
-                  Navigator.pop(context);
-                });
+//                setState(() {
+                  if(myTime!=null){
+                    Provider.of<TasksList>(context, listen: false)
+                        .addTask(Task(task: myTask), database,(DateTime.now().millisecondsSinceEpoch/12345).toInt(),notificaionService,[myHour,myMinute]);
+                    myTime = null;
+                    Navigator.pop(context);
+                  }
+//                });
               },
               child: Container(
                 padding: EdgeInsets.all(10.0),
@@ -186,12 +184,13 @@ class _TaskScreenState extends State<TaskScreen> {
             Icons.add,
           ),
           onPressed: () {
-//          insertData();
+          insertData();
             showModalBottomSheet(
               context: context,
               builder: buildBottomSheet,
               elevation: 100.0,
             );
+
           }),
       backgroundColor: Colors.blueGrey.shade700,
       body: Column(

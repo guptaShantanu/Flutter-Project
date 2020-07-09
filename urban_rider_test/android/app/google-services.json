@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1076374659408",
+    "firebase_url": "https://urbanrider-test.firebaseio.com",
+    "project_id": "urbanrider-test",
+    "storage_bucket": "urbanrider-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076374659408:android:686c51858e09e6bdf54c55",
+        "android_client_info": {
+          "package_name": "com.trusted1.urbanridertest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076374659408-lik0q6f4ha5ahhlrblvukc3rijh8k84g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq5dmX4qvZS7VCKz6XfoLcpHi-Kw91PAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076374659408-lik0q6f4ha5ahhlrblvukc3rijh8k84g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

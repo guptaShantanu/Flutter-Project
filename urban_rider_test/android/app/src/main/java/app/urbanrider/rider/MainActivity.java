@@ -1,4 +1,4 @@
-package com.trusted1.urbanridertest;
+package app.urbanrider.rider;
 
 import io.flutter.embedding.android.FlutterActivity;
 
